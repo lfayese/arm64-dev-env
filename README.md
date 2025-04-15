@@ -1,3 +1,5 @@
+![Build Status](https://github.com/lfayese/arm64-dev-env/actions/workflows/ci.yml/badge.svg)
+
 # ARM64 Ubuntu Dev Environment Bootstrap
 
 This package contains a one-command setup script for provisioning a complete developer environment on **ARM64 Ubuntu**.
