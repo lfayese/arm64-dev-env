@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: arm64-dev-env
+    volumes:
+      - .:/workspace
+    ports:
+      - "3000:3000"
+      - "5000:5000"
+    command: sleep infinity
+    tty: true
+    networks:
+      - devnet
+
+  postgres:
+    image: postgres:15
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: devpass
+      POSTGRES_DB: devdb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - devnet
+
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - devnet
+
+networks:
+  devnet:
+
+volumes:
+  postgres_data:
